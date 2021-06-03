@@ -1,14 +1,29 @@
 <template>
   <h1></h1>
-  <game-board></game-board>
-  <game-board></game-board>
+  <div v-if="gameStarted">
+    <game-board></game-board>
+    <game-board></game-board>
+  </div>
+  <enter-username v-else @confirmUsername="startGame"></enter-username>
 </template>
 
 <script>
   import GameBoard from './components/GameBoard.vue';
+  import EnterUsername from "./components/EnterUsername.vue";
 
   export default {
-    components: { GameBoard }
+    components: { GameBoard, EnterUsername },
+    data() {
+      return {
+        gameStarted: false,
+      }
+    },
+    methods: {
+      startGame(username) {
+        console.log(username);
+        this.gameStarted = true;
+      }
+    }
   }
 </script>
 
