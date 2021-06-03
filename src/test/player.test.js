@@ -36,5 +36,5 @@ it('random shots', () => {
   for (let i = 0; i < 64; i++) {
     playerA.randomAttack(playerB.getGameBoard());
   }
-  expect(playerA.randomAttack(playerB.getGameBoard())).toBe(false);
+  expect(playerA.randomAttack(playerB.getGameBoard()).result).toBe(false);
 })

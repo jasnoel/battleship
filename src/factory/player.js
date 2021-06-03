@@ -28,7 +28,8 @@ const Player = () => {
   const randomAttack = (enemyGameBoard) => {
     //if no more shots available
     if (possibleShots.length <= 0) {
-      return attack(1, 1, enemyGameBoard);
+      attack(1, 1, enemyGameBoard);
+      return { result: false, col: -1, row: -1 };
     } else {
       const index = Math.floor(Math.random() * possibleShots.length);
       const col = possibleShots[index].col;
