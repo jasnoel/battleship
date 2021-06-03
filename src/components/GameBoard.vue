@@ -16,6 +16,7 @@
   //import Player from '../factory/player.js';
   export default {
     props: ['human', 'player', 'enemy'],
+    emits: ['end'],
     data() {
       return {
       }
@@ -45,6 +46,7 @@
         const result = this.player.attack(col - 1, row - 1, this.enemy.getGameBoard());
         if (result || event.target.style.backgroundColor == 'red') {
           event.target.style.backgroundColor = 'red';
+          this.checkWin();
         } else {
           event.target.style.backgroundColor = 'blue';
         }
@@ -58,8 +60,17 @@
         let shot = document.getElementsByClassName('case ' + (result.col + 1) + (result.row + 1))[0];
         if (result.result == true) {
           shot.style.backgroundColor = 'red';
+          this.checkWin();
         } else {
           shot.style.backgroundColor = 'blue';
+        }
+      },
+      checkWin() {
+        if (this.player.getGameBoard().areSunk()) {
+          this.$emit('end', 'lost');
+        }
+        if (this.enemy.getGameBoard().areSunk()) {
+          this.$emit('end', 'won');
         }
       }
     }
