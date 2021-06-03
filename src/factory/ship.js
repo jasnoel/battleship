@@ -1,5 +1,5 @@
 const Ship = (lengthInput) => {
-  length = parseInt(lengthInput);
+  const length = parseInt(lengthInput);
   let sunk = false;
   let ship = [];
   for (let i = 0; i < length; i++) {
@@ -10,7 +10,8 @@ const Ship = (lengthInput) => {
     if (position > length) {
       return false;
     }
-    if (ship[position - 1] = true) {
+    if (ship[position - 1] == false) {
+      ship[position - 1] = true;
       return true;
     } else {
       return false;
@@ -29,7 +30,7 @@ const Ship = (lengthInput) => {
     sunk = true;
     return true;
   }
-  
+
   return { hit, isSunk };
 }
 

@@ -64,7 +64,7 @@ const GameBoard = () => {
       }
     }
     //operations
-    newShip = Ship(length);
+    let newShip = Ship(length);
     shipsList.push(newShip);
     for (let i = 0; i < length; i++) {
       if (horizontal) {
