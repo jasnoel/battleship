@@ -33,7 +33,8 @@ const Player = () => {
       const index = Math.floor(Math.random() * possibleShots.length);
       const col = possibleShots[index].col;
       const row = possibleShots[index].row;
-      return attack(col, row, enemyGameBoard);
+      const result = attack(col, row, enemyGameBoard);
+      return {result, col, row};
     }
   }
 
