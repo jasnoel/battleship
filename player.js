@@ -17,7 +17,7 @@ const Player = () => {
     const shotIndex = possibleShots.findIndex((shot) => {
       if (shot.col == col && shot.row == row) {
         return true;
-      };
+      }
     })
     if (shotIndex != -1) {
       possibleShots.splice(shotIndex, 1);
