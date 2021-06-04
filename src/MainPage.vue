@@ -1,10 +1,23 @@
 <template>
   <h1></h1>
-  <div v-if="gameStarted">
-    <game-board :human="true" :player="playerA" :enemy="playerB"></game-board>
-    <game-board :player="playerB" :enemy="playerA" @end="endGame"></game-board>
+  <div>
+    <game-board
+      v-if="placingShips"
+      :human="true"
+      :player="playerA"
+      :enemy="playerB"
+      @start="gameStarted = true"
+    ></game-board>
+    <game-board
+      v-if="gameStarted"
+      :player="playerB"
+      :enemy="playerA"
+      @end="endGame"
+    ></game-board>
   </div>
-  <enter-username v-else @confirmUsername="startGame"></enter-username>
+  <div>
+  </div>
+  <enter-username v-if="pickingUsername" @confirmUsername="startGame"></enter-username>
   <teleport to="body" v-if="scoreDisplay">
     <score-popup :result="result"></score-popup>
   </teleport>
@@ -22,6 +35,8 @@
     data() {
       return {
         gameStarted: false,
+        pickingUsername: true,
+        placingShips: false,
         username: '',
         result: '',
         playerA: Player(),
@@ -32,7 +47,8 @@
     methods: {
       startGame(username) {
         this.username = username;
-        this.gameStarted = true;
+        this.pickingUsername = false;
+        this.placingShips = true;
       },
       endGame(result) {
         this.result = result;
