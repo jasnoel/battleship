@@ -38,19 +38,15 @@
     methods: {
       actionOnClick(event, col, row) {
         if (this.placingShips) {
-          this.placeShip(event);
+          this.placeShip(event, col, row);
         } else {
           this.attackCase(event, col, row);
         }
       },
       //Gameplay
-      placeShip(event) {
+      placeShip(event, col, row) {
         if (this.colorCase(event, 'rgba(5, 255, 0, 0.59)')) {
-          let tile = event.target;
-          const splitCaseId = tile.className.split(' ')[1].split('');
-          let row = splitCaseId[0];
-          let col = splitCaseId[1];
-          this.enemy.getGameBoard().placeShip(parseInt(row) - 1, parseInt(col) - 1, this.shipsToPlace[0], !this.vertical);
+          this.enemy.getGameBoard().placeShip(parseInt(col) - 1, parseInt(row) - 1, this.shipsToPlace[0], !this.vertical);
           this.shipsToPlace.splice(0, 1);
           if (this.shipsToPlace.length <= 0) {
             this.placingShips = false;
@@ -100,9 +96,9 @@
         this.colorCase(event, 'rgba(255, 255, 255, 0.19)');
       },
       colorCase(event, color) {
+        //when you hover during your ship placement phase
         if (this.placingShips && this.noShipPlaced(event)) {
-          let tile = event.target;
-          const splitCaseId = tile.className.split(' ')[1].split('');
+          const splitCaseId = event.target.className.split(' ')[1].split('');
           let row = splitCaseId[0];
           let col = splitCaseId[1];
           if (this.vertical) {
@@ -124,16 +120,18 @@
             else {return false}
           }
         } else {
-          let bg = event.target.style;
-          if (bg.backgroundColor != 'rgba(198, 2, 2, 0.69)' &&
-              bg.backgroundColor != 'rgba(0, 169, 255, 0.54)' &&
-              bg.backgroundColor != 'rgba(5, 255, 0, 0.59)' )
+          //when you hover enemy grid
+          let tile = event.target.style;
+          if (tile.backgroundColor != 'rgba(198, 2, 2, 0.69)' &&
+              tile.backgroundColor != 'rgba(0, 169, 255, 0.54)' &&
+              tile.backgroundColor != 'rgba(5, 255, 0, 0.59)' )
           {
-            bg.backgroundColor = color;
+            tile.backgroundColor = color;
           }
         }
       },
       noShipPlaced(event) {
+        //check if there will be colision between ships
         let tile = event.target;
         const splitCaseId = tile.className.split(' ')[1].split('');
         let row = splitCaseId[0];
