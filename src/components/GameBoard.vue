@@ -32,7 +32,10 @@
       if (this.human) {
         this.placingShips = true;
         //place computer's boats
-        this.player.getGameBoard().placeShip(0, 0, 2, true);
+        this.player.getGameBoard().placeShip(0, 0, 4, true);
+        this.player.getGameBoard().placeShip(1, 0, 3, false);
+        this.player.getGameBoard().placeShip(5, 5, 3, true);
+        this.player.getGameBoard().placeShip(7, 0, 2, true);
       }
     },
     methods: {
