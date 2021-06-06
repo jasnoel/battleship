@@ -1,16 +1,33 @@
 <template>
-    <button v-if="placingShips" @click="vertical = !vertical">Rotate</button>
       <div class="gameboard">
+        <div class="horizontal-coords">
+          <ul>
+            <li v-for="number in 8"
+              :key="number"
+            >
+              {{ number }}
+            </li>
+          </ul>
+        </div>
+        <div class="vertical-coords">
+          <ul>
+            <li v-for="letter in ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']"
+              :key="letter"
+            >
+              {{ letter }}
+            </li>
+          </ul>
+        </div>
         <div v-for="row in 8" :key="row" class="row">
           <div v-for="col in 8" :key="col" :class="'case ' + col + row"
             @mouseenter="hoverCase"
             @mouseleave="leaveCase"
             @click="actionOnClick($event, col, row)"
           >
-            {{ col }} {{ row }}
           </div>
         </div>
       </div>
+      <button v-if="placingShips" @click="vertical = !vertical">Rotate</button>
 </template>
 
 <script>
@@ -180,9 +197,36 @@ button:hover {
   border-color: white;
   color: white;
 }
+.vertical-coords {
+  position: absolute;
+  left: -55px;
+  padding: 0 15px;
+  font-size: 2em;
+  color: rgb(255, 92, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.vertical-coords ul li {
+  margin: 13px 0;
+}
+.horizontal-coords {
+  width: 400px;
+  position: absolute;
+  top: -55px;
+  padding: 10px 0;
+  font-size: 2em;
+  color: rgb(255, 92, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+.horizontal-coords ul li {
+  display: inline-block;
+  margin: 0 16px;
+}
+ul {
+  list-style: none;
+}
 .gameboard {
   display: inline-block;
-  margin: 50px;
+  margin: 78px 50px 0px 50px;
   background-color: rgba(0, 0, 0, 0.4);
   border: 4px solid black;
   width: 408px;
